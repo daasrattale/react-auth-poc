@@ -1,7 +1,7 @@
 import {Link, Outlet} from "react-router-dom";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useAuth, UserProvider} from "@/app/context/useAuth.tsx";
+import {useAuth} from "@/app/context/useAuth.tsx";
 
 
 export const Layout = () => {
@@ -20,8 +20,8 @@ export const Layout = () => {
             </nav>
 
             <div className="border-2 border-gray-500 rounded">
-                    <Outlet/>
-                    <ToastContainer/>
+                <Outlet/>
+                <ToastContainer/>
             </div>
         </>
     );
