@@ -4,35 +4,38 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {Form, FormControl, FormField, FormItem, FormMessage} from "@/app/components/ui/form.tsx";
 import {Input} from "@/app/components/ui/input.tsx";
 import {Button} from "@/app/components/ui/button.tsx";
+import {useAuth} from "@/app/context/useAuth.tsx";
 
 
 export const Login = () => {
 
+    const {login} = useAuth();
+
     const formSchema = z.object({
-        username: z.string().min(2).max(50),
+        email: z.string("ooioi").min(2).max(50),
         password: z.string().min(5).max(50),
     })
 
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: "",
+            email: "",
             password: "",
         },
     })
 
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        console.log(values)
+    async function onSubmit(values: z.infer<typeof formSchema>) {
+        login(values)
     }
 
     return (
         <div className="m-10 ">
-            <h1 className="text-center mb-5 font-bold">Login Form</h1>
+            <h1 className="text-center my-10 font-normal text-xl">Login Form</h1>
             <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
                     <FormField
                         control={form.control}
-                        name="username"
+                        name="email"
                         render={({field}) => (
                             <FormItem>
                                 <FormControl>
